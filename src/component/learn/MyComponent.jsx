@@ -1,6 +1,7 @@
+import './style.css'
 const Component = () => {
   return(
-    <div>van vui ve hoc lap trinh</div>
+    <div className='vui'>van vui ve hoc lap trinh</div>
   )
 }
 

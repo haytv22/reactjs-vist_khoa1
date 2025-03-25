@@ -1,8 +1,8 @@
 const SecondComponent = () => {
     return (
-        <div>
+        <button>
             Second Component
-        </div>
+        </button>
     )
 }
 
