@@ -1,9 +1,11 @@
 import './component/todo/todo.css'
-import './App.css'
+import './styles/app.css'
 import AddInput from './component/todo/AddInput'
 import TodoList from './component/todo/ListValue'
 import ReactImg from './assets/react.svg'
 import { useState } from 'react'
+import Header from './component/layout/header'
+import Footed from './component/layout/footed'
 
 function App() {
 
@@ -13,7 +15,8 @@ function App() {
     { id: 3, name: 'Learn Express' },
   ])
 
-  return (
+  return <>
+    <Header />
     <div className="todo-container">
       <p className="todo-title">todo list</p>
       <AddInput />
@@ -22,7 +25,10 @@ function App() {
       />
       <img src={ReactImg} alt="react" className="logo" />
     </div>
-  )
+    <Footed />
+  </>
+
+
 }
 
 export default App
