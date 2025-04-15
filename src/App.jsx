@@ -6,6 +6,7 @@ import ReactImg from './assets/react.svg'
 import { useState } from 'react'
 import Header from './component/layout/header'
 import Footed from './component/layout/footed'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
 
   return <>
     <Header />
+    <Outlet />
     <div className="todo-container">
       <p className="todo-title">todo list</p>
       <AddInput />
