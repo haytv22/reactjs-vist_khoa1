@@ -6,21 +6,28 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Product from './pages/productPage.jsx';
+import BookPage from './pages/bookPage.jsx';
 import Register from './pages/registerPage.jsx';
 import User from './pages/userPage.jsx';
+import HomePage from './pages/homePage.jsx';
+import ErrorPage from './pages/errorPage.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
+      {
+        index: true,
+        element: <HomePage />
+      },
       {
         path: "/user",
         element: <User />,
       },
       {
-        path: "/product",
-        element: <Product />,
+        path: "/bookPage",
+        element: <BookPage />,
       },
     ]
   },

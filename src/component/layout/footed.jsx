@@ -1,8 +1,9 @@
-import './footed.css'
+import './footed.css';
+
 export default function Footed() {
     return (
-        <div class="footer">
+        <div className="footer">
             <p>Footer</p>
         </div>
-    )
+    );
 }
