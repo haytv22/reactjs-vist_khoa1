@@ -1,77 +1,56 @@
 import { Space, Table, Tag } from 'antd';
-export default function UserTable(params) {
+import { FetchAllUserAPI } from '../../services/api_Services';
+import { useEffect, useState } from 'react';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import UpdataUserModal from './updataUser.modal';
+export default function UserTable({ dataUser }) {
+    const [isModalUpdataOpen, setisModalUpdataOpen] = useState(false);
+    const [dataUpdata, setDataUpdata] = useState(null)
     const columns = [
         {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            render: text => <a>{text}</a>,
-        },
-        {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
-        },
-        {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
-        },
-        {
-            title: 'Tags',
-            key: 'tags',
-            dataIndex: 'tags',
-            render: (_, { tags }) => (
-                <>
-                    {tags.map(tag => {
-                        let color = tag.length > 5 ? 'geekblue' : 'green';
-                        if (tag === 'loser') {
-                            color = 'volcano';
-                        }
-                        return (
-                            <Tag color={color} key={tag}>
-                                {tag.toUpperCase()}
-                            </Tag>
-                        );
-                    })}
-                </>
+            title: 'ID',
+            dataIndex: '_id',
+            render: (_, record) => (
+                <Space size="middle">
+                    <a>Invite {record._id}</a>
+                </Space>
             ),
+        },
+        {
+            title: 'Full Name',
+            dataIndex: 'fullName',
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
         },
         {
             title: 'Action',
             key: 'action',
             render: (_, record) => (
-                <Space size="middle">
-                    <a>Invite {record.name}</a>
-                    <a>Delete</a>
+                <Space size="middle" style={{ display: 'flex', gap: '20px' }}>
+                    <EditOutlined onClick={() => {
+                        setDataUpdata(record)
+                        setisModalUpdataOpen(true)
+
+                    }} style={{ fontSize: '20px', cursor: 'pointer', color: '#1677ff' }} />
+                    <DeleteOutlined style={{ fontSize: '20px', cursor: 'pointer', color: 'red' }} />
                 </Space>
             ),
         },
-    ];
-    const data = [
-        {
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-            tags: ['nice', 'developer'],
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-            tags: ['loser'],
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sydney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        },
-    ];
+    ]
+
+
     return (
-        <div><Table columns={columns} dataSource={data} />;</div>
+        <div>
+            <Table columns={columns} dataSource={dataUser} rowKey={'_id'} />
+            <UpdataUserModal
+                isModalUpdataOpen={isModalUpdataOpen}
+                setisModalUpdataOpen={setisModalUpdataOpen}
+
+                dataUpdata={dataUpdata}
+                setDataUpdata={setDataUpdata}
+            />
+        </div>
     )
 }
