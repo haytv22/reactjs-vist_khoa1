@@ -12,11 +12,14 @@ export default function User() {
         const res = await FetchAllUserAPI()
 
         if (res.data) {
-            setDataUser(res.data)
+            setDataUser(res.data.result)
         }
     }
     return <>
         <UserForm loandUser={loandUser} />
-        <UserTable dataUser={dataUser} />
+        <UserTable
+            dataUser={dataUser}
+            loandUser={loandUser}
+        />
     </>
 }

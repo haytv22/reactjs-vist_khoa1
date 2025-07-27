@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
-import { CreateUser } from "../../services/api_Services"
+import { UpdataUser } from "../../services/api_Services"
 import { Input, Modal, notification } from "antd"
 
-const UpdataUserModal = ({ isModalUpdataOpen, setisModalUpdataOpen, dataUpdata, setDataUpdata }) => {
+const UpdataUserModal = ({ isModalUpdataOpen, setisModalUpdataOpen, dataUpdata, setDataUpdata, loandUser }) => {
     const [fullName, setFuName] = useState("")
     const [id, setId] = useState("")
-    const [password, setPassword] = useState("")
     const [phone, setPhone] = useState("")
 
     useEffect(() => {
@@ -17,21 +16,18 @@ const UpdataUserModal = ({ isModalUpdataOpen, setisModalUpdataOpen, dataUpdata, 
     }, [dataUpdata])
 
     const handleOk = async () => {
-        const res = await CreateUser(fullName, email, password, phone);
+        const res = await UpdataUser(id, fullName, phone);
         if (res.data) {
+            await loandUser()
             notification.success({
                 message: 'Edit Use',
                 description: 'Edit use thành công'
             })
             setisModalUpdataOpen(false);
-            setFuName('')
-            setEmail('')
-            setPassword('')
-            setPhone('')
-            // await loandUser()
+
         } else {
             notification.error({
-                message: 'Error creat Use',
+                message: 'Error Edit Use',
                 description: JSON.stringify(res.message)
             })
         }
