@@ -1,9 +1,11 @@
 import { Button, Col, Divider, Flex, Form, Input, message, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginAPI } from "../services/api_Services";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { authContext } from "../component/context/auth.context";
 
 export default function Login() {
+  const { setUser } = useContext(authContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const onFinish = async (value) => {
@@ -14,6 +16,9 @@ export default function Login() {
     if (res.data) {
       setLoading(false);
       message.success("đăng nhập thành công");
+      localStorage.setItem("access_token", res.data.access_token);
+      setUser(res.data.user);
+
       navigate("/");
     } else {
       setLoading(false);

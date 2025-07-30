@@ -7,6 +7,7 @@ import Register from "./pages/registerPage.jsx";
 import User from "./pages/userPage.jsx";
 import HomePage from "./pages/homePage.jsx";
 import ErrorPage from "./pages/errorPage.jsx";
+import { AuthWrapper } from "./component/context/auth.context.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,7 +41,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-  <RouterProvider router={router} />
+  <AuthWrapper>
+    <RouterProvider router={router} />
+  </AuthWrapper>
   //{" "}
   // </React.StrictMode>
 );

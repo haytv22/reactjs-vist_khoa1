@@ -1,8 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import { Menu } from "antd";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BookOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
+import { authContext } from "../context/auth.context";
 export default function Header() {
+  const { user } = useContext(authContext);
+  console.log(user);
+
   const items = [
     {
       label: <Link to={"/"}>Home</Link>,
